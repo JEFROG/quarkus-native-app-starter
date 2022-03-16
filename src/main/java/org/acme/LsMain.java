@@ -46,13 +46,17 @@ public class LsMain implements QuarkusApplication {
             URI webappUri = new URI("http://localhost:" + assignedPort + "/index.html");
             
             if (browserControl) {
-                if (chromeExecutable != null && !chromeExecutable.equals("native")) {
-                    String cmd = chromeExecutable + " --incognito --app=" + webappUri.toString();
-                    Runtime.getRuntime().exec(cmd).waitFor();
-                }
-                else {
-                    Desktop.getDesktop().browse(webappUri);
-                }
+                Runtime rt = Runtime.getRuntime();
+                String url = webappUri.toString();
+                rt.exec("open " + url);
+
+                //if (chromeExecutable != null && !chromeExecutable.equals("native")) {
+                    //String cmd = chromeExecutable + " --incognito --app=" + webappUri.toString();
+                    //Runtime.getRuntime().exec(cmd).waitFor();
+                //}
+                //else {
+                    //Desktop.getDesktop().browse(webappUri);
+                //}
             }
             else {
                 System.out.println("Please open " + webappUri);
